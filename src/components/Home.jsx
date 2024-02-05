@@ -7,6 +7,7 @@ import AddNews from '../components/AddNews';
 import { Link } from 'react-router-dom';
 import "../css/style.css";
 
+
 function Home() {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -39,8 +40,8 @@ function Home() {
         <div className="container ">
             <div className="row justify-content-center">
                 <div className="col-md-12">
-                    <h2 className="text-center mb-2">News</h2>
-                    <div className='text-center'>  <AddNews onAddNews={handleAddNews} /></div>
+
+                    <div className='text-center pb-4'>  <AddNews onAddNews={handleAddNews} /></div>
                     <hr style={{
                         backgroundColor: 'red', height: '15px'
                     }}></hr>

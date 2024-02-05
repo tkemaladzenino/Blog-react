@@ -74,6 +74,7 @@ function Details() {
         } catch (error) {
             console.error('Error deleting news:', error);
         }
+        navigate('/Home');
     };
 
     const handleAddComment = async (comment) => {
@@ -89,6 +90,8 @@ function Details() {
         } catch (error) {
             console.error('Error adding comment:', error);
         }
+
+        navigate('/Home');
     };
 
     return (

@@ -1,6 +1,8 @@
-// CommentForm.jsx
+
 // CommentForm.jsx
 import React, { useState } from 'react';
+
+import 'react-tabs/style/react-tabs.css';
 
 function CommentForm({ onCommentAdded }) {
     const [comment, setComment] = useState('');

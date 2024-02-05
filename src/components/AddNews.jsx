@@ -24,14 +24,15 @@ function AddNews({ onAddNews }) {
                 className="btn  mb-2"
                 style={{
                     position: 'fixed',
-                    top: '140px', // Adjust the bottom position as needed
-                    right: '30%', // Adjust the right position as needed
-                    zIndex: '1000', // Set a high zIndex to ensure it's above other elements
+                    right: '50%',
+                    zIndex: '1000',
                     fontWeight: 'bold',
                     backgroundColor: '#c62641',
                     border: '3px solid white',
                     borderRadius: '12px',
-                    color: 'white'
+                    color: 'white',
+                    padding: '16px',
+                    transform: 'translate(50%, -50%)',
                 }}
             >
                 Add more news

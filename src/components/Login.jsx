@@ -46,6 +46,7 @@ const Login = () => {
             } else {
                 // Handle case where login was not successful (unregistered data)
                 setErrorMessage("The data you entered is incorrect. If you are not a registered user, please register.");
+
             }
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -53,6 +54,10 @@ const Login = () => {
                 setErrorMessage("The data you entered is incorrect. If you are not a registered user, please register.");
             } else {
                 setErrorMessage('Login failed. Please try again or register');
+
+                setTimeout(() => {
+                    navigate('/Register');
+                }, 1000);
             }
         }
     };
