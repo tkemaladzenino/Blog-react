@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import CommentForm from './CommentForm';
+import Header from './Header';
 
 function Details() {
     const { id } = useParams();
@@ -50,8 +51,6 @@ function Details() {
                 comments: filteredComments,  // Send the filtered comments array to the server
             });
 
-            navigate('/');
-
             // Refresh the details after editing
             const response = await axios.get(`https://apitest.reachstar.io/blog/get/${id}`);
             if (response.status === 200 && response.data) {
@@ -95,47 +94,63 @@ function Details() {
     };
 
     return (
-        <div className="details-div pt-5 text-center">
-            <h2 className="text-center mb-4" style={{ color: 'darkGreen' }}>{newsDetails.title}</h2>
-            {loading ? (
-                <p>Loading details...</p>
-            ) : (
-                <div>
-                    <button onClick={() => setIsEditing(!isEditing)} className="btn btn-warning mr-2">
-                        {isEditing ? 'Cancel Edit' : 'Edit News'}
-                    </button>
-                    {isEditing ? (
-                        <div>
-                            <input
-                                id="editedTitleInput"
-                                type="text"
-                                value={editedTitle}
-                                onChange={(e) => setEditedTitle(e.target.value)}
-                            />
-                            <br />
-                            <textarea
-                                id="editedDescriptionInput"
-                                value={editedDescription}
-                                onChange={(e) => setEditedDescription(e.target.value)}
-                            />
-                            <br />
-                            <button onClick={handleEditNews} className="btn btn-primary">Save Changes</button>
+        <div className="detDiv p-0">
+            <Header />
+            <div className="container  Det p-4 mb-4 d-flex justify-content-center flex-column mt-5 px-4">
+
+                <h2 className="text-center  h2bord mb-4" style={{ color: 'Green', fontWeight: 'bold' }}>{newsDetails.title}</h2>
+
+
+                {loading ? (
+                    <p>Loading details...</p>
+                ) : (
+                    <div className='det-div  d-flex justify-content-center flex-column'>
+
+                        <div className="divB d-flex justify-content-center">
+                            <button onClick={() => setIsEditing(!isEditing)} className="btn btn-danger mr-2 mb-4 ">
+                                {isEditing ? 'Cancel Edit' : 'Edit News'}
+                            </button>
                         </div>
-                    ) : (
-                        // Render details if not in edit mode
-                        <div>
-                            <p style={{ color: 'green' }} dangerouslySetInnerHTML={{ __html: newsDetails.description }} />
-                            <button onClick={handleDeleteNews} className="btn btn-danger mr-2 mb-4">Delete News</button>
-                            <CommentForm onCommentAdded={handleAddComment} />
-                            {newsDetails.comments && newsDetails.comments.map((comment, index) => (
-                                <div key={index} className="comment-container">
-                                    {comment.comment}
+
+                        {isEditing ? (
+                            <div className='Edit-d d-flex justify-content-center flex-column'>
+                                <input
+                                    id="editedTitleInput"
+                                    type="text"
+                                    value={editedTitle}
+                                    onChange={(e) => setEditedTitle(e.target.value)}
+                                />
+                                <br />
+                                <textarea
+                                    id="editedDescriptionInput"
+                                    value={editedDescription}
+                                    onChange={(e) => setEditedDescription(e.target.value)}
+                                />
+                                <br />
+                                <button onClick={handleEditNews} className="btn btn-success " style={{ width: '240px' }}>Save Changes</button>
+                            </div>
+                        ) : (
+                            // Render details if not in edit mode
+                            <div className="Edit-D  d-flex  justify-content-center flex-column">
+                                <div className="title-div">
+                                    <p style={{ color: 'green', fontWeight: 'bold', textAlign: 'center' }} dangerouslySetInnerHTML={{ __html: newsDetails.description }} />
                                 </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            )}
+
+                                <div className="div d-flex justify-content-center">
+                                    <button onClick={handleDeleteNews} className="btn btn-danger mr-2 mb-4">Delete News</button>
+                                </div>
+
+                                <CommentForm onCommentAdded={handleAddComment} />
+                                {newsDetails.comments && newsDetails.comments.map((comment, index) => (
+                                    <div key={index} className="comment-container">
+                                        {comment.comment}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
