@@ -10,6 +10,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import Details from './components/Details';
+import AddNews from './components/AddNews';
 import Footer from './components/Footer';
 
 const App = () => {
@@ -21,12 +22,23 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/details/:id" element={<Details />} />
 
+
                 <Route
                     path="/Home"
                     element={
                         <>
                             <Header />
                             <Home />
+                            <Footer />
+                        </>
+                    }
+                />
+                <Route
+                    path="/AddNews"
+                    element={
+                        <>
+                            <Header />
+                            <AddNews />
                             <Footer />
                         </>
                     }

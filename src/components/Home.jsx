@@ -1,12 +1,10 @@
 
 // Home.jsx
 
+// Home.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddNews from '../components/AddNews';
 import { Link } from 'react-router-dom';
-import "../css/style.css";
-
 
 function Home() {
     const [news, setNews] = useState([]);
@@ -32,22 +30,14 @@ function Home() {
         fetchData();
     }, []);
 
-    const handleAddNews = (newArticles) => {
-        setNews((prevNews) => [...prevNews, ...newArticles]);
-    };
-
     return (
-        <div className="container ">
+        <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-12">
-
-                    <div className='text-center pb-4'>  <AddNews onAddNews={handleAddNews} /></div>
-                    <hr style={{
-                        backgroundColor: 'red', height: '15px'
-                    }}></hr>
+                    <hr style={{ backgroundColor: 'red', height: '15px' }} />
                     {
                         loading ? (
-                            <p> Loading news...</p>
+                            <p>Loading news...</p>
                         ) : (
                             <div className="row">
                                 {news.map((article) => (
@@ -71,11 +61,12 @@ function Home() {
                         )}
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 
 export default Home;
+
 
 
 

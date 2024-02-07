@@ -1,47 +1,66 @@
-import React from 'react';
+// AddNews.jsx
+
+import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
-function AddNews({ onAddNews }) {
-    const handleAddMoreNews = async () => {
+function AddNews() {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const navigate = useNavigate();
+
+    const handleAddNews = async () => {
         try {
-            const response = await axios.get('https://apitest.reachstar.io/blog/list');
-
-            if (response.status === 200 && response.data && Array.isArray(response.data) && response.data.length > 0) {
-                // Pass the new articles to the parent component
-                onAddNews(response.data.slice(0, 2));
-            } else {
-                console.error('Invalid data format in the response:', response.data);
+            if (!title.trim() || !description.trim()) {
+                alert('Please fill in both the title and description.');
+                return;
             }
+
+            await axios.post('https://apitest.reachstar.io/blog/add', { title, description });
+
+            // Redirect to the home page after adding news
+            navigate('/Home');
+
         } catch (error) {
-            console.error('Error fetching more news:', error);
+            console.error('Error adding news:', error);
         }
     };
 
     return (
-        <div className="text-center">
-            <button
-                onClick={handleAddMoreNews}
-                className="btn  mb-2"
-                style={{
-                    position: 'fixed',
-                    right: '50%',
-                    zIndex: '1000',
-                    fontWeight: 'bold',
-                    backgroundColor: '#c62641',
-                    border: '3px solid white',
-                    borderRadius: '12px',
-                    color: 'white',
-                    padding: '16px',
-                    transform: 'translate(50%, -50%)',
-                }}
-            >
-                Add more news
-            </button>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h2>Add News</h2>
+                    <div>
+                        <label>Title:</label>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label>Description:</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <button onClick={handleAddNews} className="btn btn-primary">Add News</button>
+                    <Link to="/Home" className="btn btn-secondary ml-2">Cancel</Link>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default AddNews;
+
+
+
+
+
+
 
 
 

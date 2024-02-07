@@ -17,6 +17,7 @@ const Header = () => (
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto gap-5" >
                     <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/AddNews">AddNews</Nav.Link>
                     <Nav.Link as={Link} to="/About">About</Nav.Link>
                     <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>
 
