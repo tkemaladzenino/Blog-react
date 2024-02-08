@@ -16,7 +16,10 @@ function AddNews() {
                 return;
             }
 
-            await axios.post('https://apitest.reachstar.io/blog/add', { title, description });
+            const newNewsItem = { title, description };
+
+            // Send a POST request to add the news
+            await axios.post('https://apitest.reachstar.io/blog/add', newNewsItem);
 
             // Redirect to the home page after adding news
             navigate('/Home');
@@ -30,22 +33,22 @@ function AddNews() {
         <div className="container">
             <div className="row Det justify-content-center mt-5">
                 <div className="col-md-6">
-                    <h2 className="text-center mb-4">Add News</h2>
+                    <h2 className="text-center pt-4" style={{ color: 'green', fontWeight: 'bold' }}>Add News</h2>
                     <div className="form-group">
-                        <label htmlFor="title">Title:</label>
+                        <label htmlFor="title" style={{ color: 'red', fontWeight: 'bold' }}>Title:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="title"
+                            id="titleAdd"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
                     <div className="form-group" style={{ Color: 'green' }}>
-                        <label htmlFor="description">Description:</label>
+                        <label htmlFor="description" style={{ color: 'red', fontWeight: 'bold' }}>Description:</label>
                         <textarea
                             className="form-control"
-                            id="description"
+                            id="descriptionAdd"
                             rows="5"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -62,6 +65,8 @@ function AddNews() {
 }
 
 export default AddNews;
+
+
 
 
 

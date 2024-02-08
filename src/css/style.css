@@ -264,6 +264,21 @@ textarea::placeholder {
 }
 
 
+/*  --------------------        AddNEWS             ---------------------*/
+
+#titleAdd {
+    max-width: 200px;
+    border: 1px solid green;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+#descriptionAdd {
+    max-width: 100%;
+    border: 1px solid green;
+    border-radius: 16px;
+    padding: 20px;
+}
 
 
 

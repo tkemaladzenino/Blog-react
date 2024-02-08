@@ -68,7 +68,7 @@ function Details() {
         try {
             await axios.delete(`https://apitest.reachstar.io/blog/delete/${id}`);
             // Redirect to the home page after deletion
-            navigate('/');
+            navigate('/Home');
         } catch (error) {
             console.error('Error deleting news:', error);
         }
@@ -98,7 +98,6 @@ function Details() {
 
                 <h2 className="text-center  h2bord mb-4" style={{ color: 'Green', fontWeight: 'bold' }}>{newsDetails.title}</h2>
 
-
                 {loading ? (
                     <p>Loading details...</p>
                 ) : (
@@ -110,6 +109,8 @@ function Details() {
                             </button>
                             <button onClick={handleDeleteNews} className="btn btn-danger mb-4 ">Delete News</button>
                         </div>
+
+
 
                         {isEditing ? (
                             <div className='Edit-d d-flex justify-content-center flex-column'>
