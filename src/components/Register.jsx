@@ -37,9 +37,7 @@ const Register = () => {
                 setConfirmationMessage('Registration successful');
 
                 console.log('Navigate:', navigate); // Check if navigate is defined
-
-                // Navigate to /home without using './'
-                navigate('/home');
+                navigate('/Home');
 
             } else {
                 console.error('Registration failed. Response:', response.data);

@@ -38,18 +38,19 @@ function Details() {
 
     const handleEditNews = async () => {
         try {
-            console.log('Editing news...');
-            // Assuming 'unwantedCommentId' is the ID of the comment you want to remove
-            const unwantedCommentId = 'id';  // Replace with the actual ID
-            // Remove the unwanted comment from the comments array
-            const filteredComments = newsDetails.comments.filter(comment => comment.id !== unwantedCommentId);
-            setIsEditing(false);
-            console.log('News edited successfully!');
-            await axios.post(`https://apitest.reachstar.io/blog/edit/${id}`, {
+            if (!editedTitle.trim() || !editedDescription.trim()) {
+                alert('Please fill in both the title and description.');
+                return;
+            }
+
+            const updatedNews = {
                 title: editedTitle,
                 description: editedDescription,
-                comments: filteredComments,  // Send the filtered comments array to the server
-            });
+            };
+
+            await axios.put(`https://apitest.reachstar.io/blog/edit/${id}`, updatedNews);
+
+            setIsEditing(false);
 
             // Refresh the details after editing
             const response = await axios.get(`https://apitest.reachstar.io/blog/get/${id}`);
@@ -58,8 +59,6 @@ function Details() {
                 setEditedTitle(response.data.title);
                 setEditedDescription(response.data.description);
             }
-
-            setIsEditing(false);
         } catch (error) {
             console.error('Error editing news:', error);
         }
@@ -69,11 +68,10 @@ function Details() {
         try {
             await axios.delete(`https://apitest.reachstar.io/blog/delete/${id}`);
             // Redirect to the home page after deletion
-            window.location.href = '/home';
+            navigate('/');
         } catch (error) {
             console.error('Error deleting news:', error);
         }
-        navigate('/Home');
     };
 
     const handleAddComment = async (comment) => {
@@ -106,10 +104,11 @@ function Details() {
                 ) : (
                     <div className='det-div  d-flex justify-content-center flex-column'>
 
-                        <div className="divB d-flex justify-content-center">
-                            <button onClick={() => setIsEditing(!isEditing)} className="btn btn-danger mr-2 mb-4 ">
+                        <div className="divB d-flex justify-content-center gap-4">
+                            <button onClick={() => setIsEditing(!isEditing)} className="btn btn-danger mb-4">
                                 {isEditing ? 'Cancel Edit' : 'Edit News'}
                             </button>
+                            <button onClick={handleDeleteNews} className="btn btn-danger mb-4 ">Delete News</button>
                         </div>
 
                         {isEditing ? (
@@ -132,13 +131,6 @@ function Details() {
                         ) : (
                             // Render details if not in edit mode
                             <div className="Edit-D  d-flex  justify-content-center flex-column">
-                                <div className="title-div">
-                                    <p style={{ color: 'green', fontWeight: 'bold', textAlign: 'center' }} dangerouslySetInnerHTML={{ __html: newsDetails.description }} />
-                                </div>
-
-                                <div className="div d-flex justify-content-center">
-                                    <button onClick={handleDeleteNews} className="btn btn-danger mr-2 mb-4">Delete News</button>
-                                </div>
 
                                 <CommentForm onCommentAdded={handleAddComment} />
                                 {newsDetails.comments && newsDetails.comments.map((comment, index) => (

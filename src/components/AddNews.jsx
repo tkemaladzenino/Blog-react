@@ -28,33 +28,41 @@ function AddNews() {
 
     return (
         <div className="container">
-            <div className="row justify-content-center">
+            <div className="row Det justify-content-center mt-5">
                 <div className="col-md-6">
-                    <h2>Add News</h2>
-                    <div>
-                        <label>Title:</label>
+                    <h2 className="text-center mb-4">Add News</h2>
+                    <div className="form-group">
+                        <label htmlFor="title">Title:</label>
                         <input
                             type="text"
+                            className="form-control"
+                            id="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
-                    <div>
-                        <label>Description:</label>
+                    <div className="form-group" style={{ Color: 'green' }}>
+                        <label htmlFor="description">Description:</label>
                         <textarea
+                            className="form-control"
+                            id="description"
+                            rows="5"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
-                    <button onClick={handleAddNews} className="btn btn-primary">Add News</button>
-                    <Link to="/Home" className="btn btn-secondary ml-2">Cancel</Link>
+                    <div className="d-flex justify-content-center gap-4 pb-5 pt-3">
+                        <button onClick={handleAddNews} className="btn btn-success " style={{ width: '150px' }} >Add News</button>
+                        <Link to="/Home" className="btn btn-danger " style={{ width: '150px' }}>Cancel</Link>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
 export default AddNews;
+
 
 
 

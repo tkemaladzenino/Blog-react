@@ -1,7 +1,6 @@
 
 // Home.jsx
 
-// Home.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -34,6 +33,8 @@ function Home() {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-12">
+
+
                     <hr style={{ backgroundColor: 'red', height: '15px' }} />
                     {
                         loading ? (
@@ -59,6 +60,26 @@ function Home() {
                                 ))}
                             </div>
                         )}
+
+                    <div className="text-center">
+                        <button
+                            className="btn mt-2"
+                            style={{
+                                position: 'fixed',
+                                right: '50%',
+                                zIndex: '1000',
+                                fontWeight: 'bold',
+                                backgroundColor: '#c62641',
+                                border: '3px solid white',
+                                borderRadius: '12px',
+                                color: 'white',
+                                padding: '12px',
+                                transform: 'translate(50%, -50%)',
+                            }}
+                        >
+                            View more
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
